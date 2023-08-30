@@ -9,12 +9,7 @@ function BlogList({ post }: { post: SanityDocument }) {
   const comp = {
     types: {
       image: ({ value }: { value: any }) => (
-        <Image
-          src={urlFor(value).url()}
-          alt={"okay"}
-          width={300}
-          height={300}
-        />
+        <Image src={urlFor(value).url()} alt={"okay"} fill />
       ),
     },
   };

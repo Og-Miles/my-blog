@@ -12,7 +12,7 @@ import Link from "next/link";
 const PreviewProvider = dynamic(() => import("@/components/PreviewProvider"));
 
 export const postsQuery = groq`*[_type == "post" && defined(slug.current)]{
-  _id, title, slug
+  _id, title, slug, author, mainImage
 }`;
 
 export const getStaticProps: GetStaticProps = async (context) => {

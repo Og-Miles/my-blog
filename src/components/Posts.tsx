@@ -9,18 +9,14 @@ import BlogList from "./BlogList";
 import urlFor from "../../sanity/lib/urlFor";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
+import ArticleBanner from "./ArticleBanner";
 
 export default function Posts({ posts }: { posts: SanityDocument }) {
   // const title = posts.length === 1 ? `1 Post` : `${posts.length} Posts`;
   const comp = {
     types: {
       image: ({ value }: { value: any }) => (
-        <Image
-          src={urlFor(value).url()}
-          alt={"okay"}
-          width={300}
-          height={300}
-        />
+        <Image src={urlFor(value).url()} alt={"okay"} fill />
       ),
     },
   };
@@ -34,13 +30,12 @@ export default function Posts({ posts }: { posts: SanityDocument }) {
         {posts.map((post: any) => {
           console.log(post.title);
           return (
-            <Link
-              key={post._id}
-              href={post.slug.current}
-              className='p-4 hover:bg-blue-50'
-            >
-              <BlogList post={post} />
-            </Link>
+            <>
+              <ArticleBanner post={post} />
+              <Link key={post._id} href={post.slug.current}>
+                <BlogList post={post} />
+              </Link>
+            </>
           );
         })}
       </main>
