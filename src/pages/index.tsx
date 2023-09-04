@@ -12,8 +12,10 @@ import Link from "next/link";
 const PreviewProvider = dynamic(() => import("@/components/PreviewProvider"));
 
 export const postsQuery = groq`*[_type == "post" && defined(slug.current)]{
-  _id, title, slug, author, mainImage
-}`;
+  ...,
+  author->,
+  categories[]->
+} | order(_createdAt desc)`;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const preview = context.previewData || false;

@@ -25,13 +25,13 @@ export default function Posts({ posts }: { posts: SanityDocument }) {
       <Head>{/* <title>{title}</title> */}</Head>
       <Header />
       <Banner />
-      <main className='container mx-auto grid grid-cols-1 divide-y divide-blue-100 max-w-7xl px-10'>
+      <ArticleBanner />
+      <main className='container mx-auto grid grid-cols-1 md:grid-cols-2 max-w-7xl px-10 gap-10 gap-y-16 pb-24'>
         {/* <h1 className='text-2xl p-4 font-bold'>{title}</h1> */}
+
         {posts.map((post: any) => {
-          console.log(post.title);
           return (
             <>
-              <ArticleBanner post={post} />
               <Link key={post._id} href={post.slug.current}>
                 <BlogList post={post} />
               </Link>

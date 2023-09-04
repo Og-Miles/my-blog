@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const PreviewProvider = dynamic(() => import("@/components/PreviewProvider"));
 export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{ 
-  title, mainImage, body
+  title, mainImage, body, author->, description, categories[]->, _createdAt
 }`;
 
 // Prepare Next.js to know which routes already exist
@@ -49,11 +49,10 @@ export default function Page({
     return (
       <PreviewProvider previewToken={previewToken}>
         <PreviewPost post={data} />
-        <div className="prose prose-lg px-4 prose-blue clear-both py-16 mx-auto">
-          <Link href="/api/exit-preview">
-          <p>Exit preview</p>
+        <div className='prose prose-lg px-4 prose-blue clear-both py-16 mx-auto'>
+          <Link href='/api/exit-preview'>
+            <p>Exit preview</p>
           </Link>
-          
         </div>
       </PreviewProvider>
     );
