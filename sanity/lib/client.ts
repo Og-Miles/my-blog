@@ -1,6 +1,7 @@
-import { createClient } from 'next-sanity'
-
+import { Any, createClient } from 'next-sanity'
+import algoliasearch from 'algoliasearch/lite';
 import { apiVersion, dataset, projectId, useCdn } from '../env'
+
 
 export const client = createClient({
   apiVersion,
@@ -9,8 +10,12 @@ export const client = createClient({
   useCdn,
 })
 
-export async function fetchPaginatedData(page : any, pageSize : any) {
-  const query = `*[_type == 'post'] | order(_createdAt desc) [${(page - 1) * pageSize}..${page * pageSize - 1}]`;
+
+
+//Pagination
+export async function fetchPaginatedData(page : number, postSize : number) {
+  const query = `*[_type == 'post'] | order(_createdAt desc) [${(page - 1) * postSize}..${page * postSize - 1}]`;
   const result = await client.fetch(query);
   return result;
 }
+

@@ -10,11 +10,10 @@ import urlFor from "../../sanity/lib/urlFor";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import ArticleBanner from "./ArticleBanner";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { fetchPaginatedData } from "../../sanity/lib/client";
 
 export default function Posts({ posts }: { posts: SanityDocument }) {
-  // const title = posts.length === 1 ? `1 Post` : `${posts.length} Posts`;
   const comp = {
     types: {
       image: ({ value }: { value: any }) => (
@@ -25,21 +24,36 @@ export default function Posts({ posts }: { posts: SanityDocument }) {
 
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const pageSize = 1; // Set your desired page size here
-  const startIndex = (page - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
+  const postSize = 1; // Amount of Posts to display per page
+  const startIndex = (page - 1) * postSize;
+  const endIndex = startIndex + postSize;
   const visiblePosts = posts.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(posts.length / pageSize);
+  const totalPages = Math.ceil(posts.length / postSize);
+
+  let pageRange = []; //Page range will be dynamic
+
+  // Stating rules for Page range
+  if (totalPages <= 5) {
+    pageRange = Array.from({ length: totalPages }, (_, i) => i + 1);
+  } else {
+    if (page <= 3) {
+      pageRange = [1, 2, 3, "...", totalPages - 1, totalPages];
+    } else if (page >= totalPages - 2) {
+      pageRange = [1, 2, "...", totalPages - 2, totalPages - 1, totalPages];
+    } else {
+      pageRange = [1, "...", page - 1, page, page + 1, "...", totalPages];
+    }
+  }
 
   useEffect(() => {
-    fetchPaginatedData(page, pageSize).then((result) => {
+    fetchPaginatedData(page, postSize).then((result) => {
       setData(result);
     });
   }, [page]);
 
   return (
     <>
-      <Head>{/* <title>{title}</title> */}</Head>
+      <Head>Miles Weekly Blog</Head>
       <Header />
       <Banner />
       <ArticleBanner />
@@ -56,18 +70,36 @@ export default function Posts({ posts }: { posts: SanityDocument }) {
           );
         })}
       </main>
-      <div className='flex justify-around mb-5'>
+      <div className='flex mb-5 items-center mx-auto justify-center'>
         <button
           onClick={() => setPage(page - 1)}
           disabled={page === 1}
-          className='border text-black py-2 px-3 rounded'
+          className='border text-black py-2 px-3 rounded mr-2'
         >
           Previous
         </button>
+        {pageRange.map((pageNumber: any, index) => (
+          <Fragment key={index}>
+            {pageNumber === "..." ? (
+              <span className='px-2'>...</span>
+            ) : (
+              <button
+                onClick={() => setPage(pageNumber)}
+                className={`${
+                  pageNumber === page
+                    ? "bg-black text-white"
+                    : "border text-black"
+                } py-2 px-3 rounded mr-2`}
+              >
+                {pageNumber}
+              </button>
+            )}
+          </Fragment>
+        ))}
         <button
           onClick={() => setPage(page + 1)}
-          className='bg-black text-white py-2 px-5 rounded'
           disabled={page === totalPages}
+          className='bg-black text-white py-2 px-5 rounded'
         >
           Next
         </button>
