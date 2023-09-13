@@ -13,7 +13,14 @@ const PreviewProvider = dynamic(() => import("@/components/PreviewProvider"));
 export const postQuery = groq`
   *[_type == "post" && slug.current == $slug][0]{
     title,
-    mainImage,
+    mainImage {
+      _type,
+      alt,
+      asset {
+        _ref,
+        _type
+      }
+    },
     body,
     author->,
     description,
