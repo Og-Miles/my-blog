@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { SocialIcon } from "react-social-icons";
 
@@ -6,7 +5,7 @@ function Banner() {
   return (
     <div className='flex flex-col lg:flex-row justify-between px-10 py-5 space-x-2 max-w-7xl mx-auto'>
       <div>
-        <h1 className='text-7xl font-bold'>Mile's Weekly Blog</h1>
+        <h1 className='text-7xl font-bold'>Miles Weekly Blog</h1>
         <p className='mt-5 md:mt-2 text-gray-400 max-w-sm'>
           Latest technologies | Weekly Debugging | New Features, projects talks
           & More!
