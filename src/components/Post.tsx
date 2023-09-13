@@ -1,9 +1,5 @@
-// ./nextjs-pages/src/components/Post.tsx
-
 import Image from "next/image";
 import Head from "next/head";
-// import imageUrlBuilder from "@sanity/image-url";
-// import { client } from "../../sanity/lib/client";
 import { SanityDocument } from "@sanity/client";
 import { PortableText } from "@portabletext/react";
 import Header from "./Header";
@@ -11,10 +7,33 @@ import Banner from "./Banner";
 import urlFor from "../../sanity/lib/urlFor";
 import category from "../../sanity/schemas/category";
 import { RichTextComponents } from "./RichTextComponents";
+import { groq } from "next-sanity";
 
-// const builder = imageUrlBuilder(client);
+export const postQuery = groq`
+  *[_type == "post" && slug.current == $slug][0]{
+    title,
+    mainImage,
+    body,
+    author->,
+    description,
+    categories[]->,
+    _createdAt
+  }
+`;
 
 export default function Post({ post }: { post: SanityDocument }) {
+  const comp = {
+    types: {
+      image: ({ value }: { value: any }) => (
+        <Image
+          src={urlFor(value).url()}
+          alt={"okay"}
+          className='object-cover object-left lg:object-center'
+          fill
+        />
+      ),
+    },
+  };
   return (
     <>
       <Head>Moore Blog</Head>
@@ -24,12 +43,9 @@ export default function Post({ post }: { post: SanityDocument }) {
         <section className='space-y-2 border text-white'>
           <div className='relative min-h-56 flex flex-col md:flex-row justify-between'>
             <div className='absolute top-0 w-full h-full opacity-10 p-10 blur-sm'>
-              <Image
-                className='object-cover object-center mx-auto'
-                src={urlFor(post.mainImage).url()}
-                alt='{post.author.name}'
-                fill
-              />
+              {post.mainImage && (
+                <PortableText value={post.mainImage} components={comp} />
+              )}
             </div>
 
             <section className='p-5 bg-[#2b8fa8] w-full'>

@@ -1,21 +1,27 @@
-// ./nextjs-pages/src/pages/[slug].tsx
-
 import { SanityDocument } from "@sanity/client";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { groq } from "next-sanity";
 import { client } from "../../sanity/lib/client";
 import Post from "@/components/Post";
 import dynamic from "next/dynamic";
-import PreviewPost from "../components/PreviewPost";
+import PreviewPost from "@/components/PreviewPost";
 import { getClient } from "../../sanity/lib/getClient";
 import Link from "next/link";
 
 const PreviewProvider = dynamic(() => import("@/components/PreviewProvider"));
-export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{ 
-  title, mainImage, body, author->, description, categories[]->, _createdAt
-}`;
 
-// Prepare Next.js to know which routes already exist
+export const postQuery = groq`
+  *[_type == "post" && slug.current == $slug][0]{
+    title,
+    mainImage,
+    body,
+    author->,
+    description,
+    categories[]->,
+    _createdAt
+  }
+`;
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await client.fetch(
     groq`*[_type == "post" && defined(slug.current)][]{
@@ -28,10 +34,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const preview = context.previewData || false;
-  const previewToken = preview ? process.env.SANITY_READ_TOKEN : ``;
-  const client = getClient(previewToken);
+  const previewToken = preview ? process.env.SANITY_READ_TOKEN : "";
+  const sanityClient = getClient(previewToken);
 
-  const data = await client.fetch(postQuery, context.params);
+  const data = await sanityClient.fetch(postQuery, context.params);
 
   return { props: { data, preview, previewToken } };
 };

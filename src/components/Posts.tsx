@@ -24,7 +24,7 @@ export default function Posts({ posts }: { posts: SanityDocument }) {
 
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const postSize = 1; // Amount of Posts to display per page
+  const postSize = 6; // Amount of Posts to display per page
   const startIndex = (page - 1) * postSize;
   const endIndex = startIndex + postSize;
   const visiblePosts = posts.slice(startIndex, endIndex);
