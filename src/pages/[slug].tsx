@@ -12,10 +12,15 @@ const PreviewProvider = dynamic(() => import("@/components/PreviewProvider"));
 
 export const postQuery = groq`
   *[_type == "post" && slug.current == $slug][0]{
-    ...,
-  author->,
-  categories[]->
-} | order(_createdAt desc)`;
+    title,
+    mainImage,
+    body,
+    author->,
+    description,
+    categories[]->,
+    _createdAt
+  }
+`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await client.fetch(

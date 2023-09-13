@@ -24,7 +24,7 @@ export const postQuery = groq`
 export default function Post({ post }: { post: SanityDocument }) {
   const comp = {
     types: {
-      image: ({ value }: { value: any }) => (
+      image: ({ value }: { value: image }) => (
         <Image
           src={urlFor(value).url()}
           alt={"okay"}
@@ -34,6 +34,7 @@ export default function Post({ post }: { post: SanityDocument }) {
       ),
     },
   };
+  console.log(post.mainImage);
   return (
     <>
       <Head>Moore Blog</Head>
@@ -43,9 +44,9 @@ export default function Post({ post }: { post: SanityDocument }) {
         <section className='space-y-2 border text-white'>
           <div className='relative min-h-56 flex flex-col md:flex-row justify-between'>
             <div className='absolute top-0 w-full h-full opacity-10 p-10 blur-sm'>
-              {post.mainImage && (
-                <PortableText value={post.mainImage} components={comp} />
-              )}
+              if (post && post.mainImage){" "}
+              {<PortableText value={post.mainImage} components={comp} />} else{" "}
+              {<p>no image found</p>}
             </div>
 
             <section className='p-5 bg-[#2b8fa8] w-full'>
