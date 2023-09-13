@@ -12,7 +12,14 @@ import { groq } from "next-sanity";
 export const postQuery = groq`
   *[_type == "post" && slug.current == $slug][0]{
     title,
-    mainImage,
+    mainImage {
+      _type,
+      alt,
+      asset {
+        _ref,
+        _type
+      }
+    },
     body,
     author->,
     description,
@@ -34,6 +41,7 @@ export default function Post({ post }: { post: SanityDocument }) {
       ),
     },
   };
+  console.log("Post data:", post);
 
   return (
     <>
