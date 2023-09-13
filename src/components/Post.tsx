@@ -24,7 +24,7 @@ export const postQuery = groq`
 export default function Post({ post }: { post: SanityDocument }) {
   const comp = {
     types: {
-      image: ({ value }: { value: image }) => (
+      image: ({ value }: { value: string }) => (
         <Image
           src={urlFor(value).url()}
           alt={"okay"}
@@ -34,7 +34,7 @@ export default function Post({ post }: { post: SanityDocument }) {
       ),
     },
   };
-  console.log(post.mainImage);
+
   return (
     <>
       <Head>Moore Blog</Head>
