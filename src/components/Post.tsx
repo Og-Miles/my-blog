@@ -17,7 +17,7 @@ import { RichTextComponents } from "./RichTextComponents";
 export default function Post({ post }: { post: SanityDocument }) {
   return (
     <>
-      <Head></Head>
+      <Head>Moore Blog</Head>
       <Header />
       <Banner />
       <article className='px-10 pb-28 max-w-7xl mx-auto'>
