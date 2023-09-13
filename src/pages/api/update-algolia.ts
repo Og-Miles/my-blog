@@ -1,4 +1,4 @@
-import algoliasearch from 'algoliasearch/lite';
+import algoliasearch from 'algoliasearch';
 import sanityclient from '@sanity/client'
 import indexer, { flattenBlocks } from 'sanity-algolia';
 
