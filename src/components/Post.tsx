@@ -28,7 +28,7 @@ export const postQuery = groq`
   }
 `;
 
-export default function Post({ post }: { post: SanityDocument }) {
+export default function Post({ post }: { post: any }) {
   const comp = {
     types: {
       image: ({ value }: { value: string }) => (

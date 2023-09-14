@@ -54,7 +54,7 @@ export default function Page({
   preview,
   previewToken,
 }: {
-  data: SanityDocument;
+  data: any;
   preview: boolean;
   previewToken?: string;
 }) {
