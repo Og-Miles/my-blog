@@ -6,9 +6,6 @@ import { client } from "../../sanity/lib/client";
 import Banner from "./Banner";
 import Header from "./Header";
 import { RichTextComponents } from "./RichTextComponents";
-import PostBanner from "./PostBanner";
-import Image from "next/image";
-import MoreStories from "./MoreStories";
 import BackToTopButton from "./BackToTopButton";
 
 const builder = imageUrlBuilder(client);
