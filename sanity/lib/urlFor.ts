@@ -1,4 +1,3 @@
-import React from 'react'
 import {client} from './client'
 import imageUrlBuilder from '@sanity/image-url'
 

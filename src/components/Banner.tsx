@@ -12,7 +12,7 @@ function Banner() {
         </p>
 
         <div className='flex place-items-center bg-gray-200 rounded-full px-5 mt-5 max-w-xs'>
-          <MagnifyingGlassIcon className='w-[24px] h-[24px] items-center' />
+          <MagnifyingGlassIcon className='w-[24px] h-[24px] items-center dark:text-black' />
           <input
             type='text'
             placeholder='Search'

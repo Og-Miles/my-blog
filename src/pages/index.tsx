@@ -37,7 +37,7 @@ export default function Home({
   preview,
   previewToken,
 }: {
-  data: SanityDocument;
+  data: SanityDocument[];
   preview: boolean;
   previewToken?: string;
 }) {

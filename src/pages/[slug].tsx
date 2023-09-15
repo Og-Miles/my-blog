@@ -1,3 +1,5 @@
+// ./nextjs-pages/src/pages/[slug].tsx
+
 import { SanityDocument } from "@sanity/client";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { groq } from "next-sanity";
@@ -9,26 +11,11 @@ import { getClient } from "../../sanity/lib/getClient";
 import Link from "next/link";
 
 const PreviewProvider = dynamic(() => import("@/components/PreviewProvider"));
+export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{ 
+  title, mainImage, body, author->, _createdAt, description, categories[]->
+}`;
 
-export const postQuery = groq`
-  *[_type == "post" && slug.current == $slug][0]{
-    title,
-    mainImage {
-      _type,
-      alt,
-      asset {
-        _ref,
-        _type
-      }
-    },
-    body,
-    author->,
-    description,
-    categories[]->,
-    _createdAt
-  }
-`;
-
+// Prepare Next.js to know which routes already exist
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await client.fetch(
     groq`*[_type == "post" && defined(slug.current)][]{
@@ -40,11 +27,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const preview = context.previewData || false;
-  const previewToken = preview ? process.env.SANITY_READ_TOKEN : "";
-  const sanityClient = getClient(previewToken);
+  const preview = context.draftMode || false;
+  const previewToken = preview ? process.env.SANITY_READ_TOKEN : ``;
+  const client = getClient(previewToken);
 
-  const data = await sanityClient.fetch(postQuery, context.params);
+  const data = await client.fetch(postQuery, context.params);
 
   return { props: { data, preview, previewToken } };
 };
@@ -54,7 +41,7 @@ export default function Page({
   preview,
   previewToken,
 }: {
-  data: any;
+  data: SanityDocument;
   preview: boolean;
   previewToken?: string;
 }) {
@@ -63,9 +50,7 @@ export default function Page({
       <PreviewProvider previewToken={previewToken}>
         <PreviewPost post={data} />
         <div className='prose prose-lg px-4 prose-blue clear-both py-16 mx-auto'>
-          <Link href='/api/exit-preview'>
-            <p>Exit preview</p>
-          </Link>
+          <Link href={"/api/exit-preview"}>Exit preview</Link>
         </div>
       </PreviewProvider>
     );

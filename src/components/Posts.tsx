@@ -1,5 +1,3 @@
-// ./nextjs-pages/src/components/Posts.tsx
-"use client";
 import Link from "next/link";
 import type { SanityDocument } from "next-sanity";
 import Head from "next/head";
@@ -13,7 +11,7 @@ import ArticleBanner from "./ArticleBanner";
 import { Fragment, useEffect, useState } from "react";
 import { fetchPaginatedData } from "../../sanity/lib/client";
 
-export default function Posts({ posts }: { posts: SanityDocument }) {
+export default function Posts({ posts = [] }: { posts: SanityDocument[] }) {
   const comp = {
     types: {
       image: ({ value }: { value: any }) => (
@@ -53,7 +51,6 @@ export default function Posts({ posts }: { posts: SanityDocument }) {
 
   return (
     <>
-      <Head>Miles Weekly Blog</Head>
       <Header />
       <Banner />
       <ArticleBanner />
@@ -74,7 +71,7 @@ export default function Posts({ posts }: { posts: SanityDocument }) {
         <button
           onClick={() => setPage(page - 1)}
           disabled={page === 1}
-          className='border text-black py-2 px-3 rounded mr-2'
+          className='border text-black py-2 px-3 rounded mr-2 dark:bg-white'
         >
           Previous
         </button>

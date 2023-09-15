@@ -29,7 +29,7 @@ function BlogList({ post }: { post: SanityDocument }) {
           ) : (
             <p>No main image available</p>
           )}
-          <div className='absolute bg-white w-fit h-fit rounded-3xl bottom-5 left-[46px] md:left-[200px] items-center py-2 px-3'>
+          <div className='absolute bg-white text-black w-fit h-fit rounded-3xl bottom-5 left-[46px] md:left-[200px] items-center py-2 px-3'>
             <div className='flex justify-evenly '>
               <Image
                 src={urlFor(post.author.image).url()}
@@ -44,8 +44,8 @@ function BlogList({ post }: { post: SanityDocument }) {
         </div>
       </div>
       <h2 className='font-bold text-lg mt-3 mb-3'>{post.title}</h2>
-      <p className='w-full h-full'>{post.description}</p>
-      <button className='bg-black rounded text-white py-3 px-5 mt-3'>
+      <p className='w-full h-full md:h-[72px]'>{post.description}</p>
+      <button className='bg-black rounded text-white dark:bg-white dark:text-black py-3 px-5 mt-3'>
         Read More
       </button>
     </div>

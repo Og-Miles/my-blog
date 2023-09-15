@@ -5,7 +5,11 @@ import { useLiveQuery } from "@sanity/preview-kit";
 import { postsQuery } from "@/pages";
 import Posts from "./Posts";
 
-export default function PreviewPosts({ posts }: { posts: SanityDocument }) {
+export default function PreviewPosts({
+  posts = [],
+}: {
+  posts: SanityDocument[];
+}) {
   const [data] = useLiveQuery(posts, postsQuery);
 
   return <Posts posts={data} />;
