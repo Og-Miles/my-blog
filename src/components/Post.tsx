@@ -8,6 +8,8 @@ import Header from "./Header";
 import { RichTextComponents } from "./RichTextComponents";
 import PostBanner from "./PostBanner";
 import Image from "next/image";
+import MoreStories from "./MoreStories";
+import BackToTopButton from "./BackToTopButton";
 
 const builder = imageUrlBuilder(client);
 
@@ -23,6 +25,7 @@ export default function Post({ post }: { post: SanityDocument }) {
         {post?.body ? (
           <PortableText value={post?.body} components={RichTextComponents} />
         ) : null}
+        <BackToTopButton />
       </main>
     </>
   );

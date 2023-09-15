@@ -6,7 +6,6 @@ import Header from "../components/Header";
 import BlogList from "./BlogList";
 import urlFor from "../../sanity/lib/urlFor";
 import Image from "next/image";
-import { PortableText } from "@portabletext/react";
 import ArticleBanner from "./ArticleBanner";
 import { Fragment, useEffect, useState } from "react";
 import { fetchPaginatedData } from "../../sanity/lib/client";
