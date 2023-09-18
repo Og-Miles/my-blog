@@ -12,8 +12,6 @@ function Banner(posts: any) {
           Latest technologies | Weekly Debugging | New Features, projects talks
           & More!
         </p>
-
-        <Search posts={posts} />
       </div>
 
       <div className='mt-5 lg:mt-0'>

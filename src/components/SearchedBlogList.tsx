@@ -4,22 +4,19 @@ import React from "react";
 import urlFor from "../../sanity/lib/urlFor";
 
 const SearchedBlogList = ({ posts }: { posts: SanityDocument[] }) => {
-  console.log("posts:", posts); // Updated prop name
+  console.log("posts:", posts);
 
   return (
-    <div className='flex flex-wrap w-full h-full'>
+    <div className='flex flex-wrap w-full'>
       {posts.map((post: SanityDocument) => (
-        <div
-          key={post._id}
-          className='flex flex-col p-4 border border-gray-300 mb-4'
-        >
-          <div className='w-32 h-32 relative'>
+        <div key={post._id} className='flex justify-between p-4 mb-4'>
+          <div className='w-full'>
             <Image
-              src={urlFor(post.mainImage).url()} // Assuming `mainImage` is a valid URL
+              src={urlFor(post.mainImage).url()}
               alt={post.title}
-              className='w-full h-full object-cover rounded'
-              width={32}
-              height={32}
+              className=' object-contain rounded'
+              width={220}
+              height={140}
               priority
             />
           </div>

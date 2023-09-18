@@ -3,7 +3,7 @@ import { useOutsideClick } from "@chakra-ui/react-use-outside-click";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { groq } from "next-sanity";
 import { SanityDocument } from "sanity";
-import SearchedBlogList from "./searchedBlogList";
+import SearchedBlogList from "./SearchedBlogList";
 import { client } from "../../sanity/lib/client";
 
 const Search = (posts: any) => {
@@ -64,7 +64,7 @@ const Search = (posts: any) => {
   }, [searchText]);
 
   return (
-    <div className=' flex flex-col justify-between' ref={ref}>
+    <div className=' flex flex-col justify-between max-w-7xl px-10' ref={ref}>
       <div className='flex place-items-center px-5 mt-5 max-w-xs box-border border border-gray-900'>
         <MagnifyingGlassIcon className='w-[24px] h-[24px] items-center dark:text-black' />
         <input
@@ -78,7 +78,7 @@ const Search = (posts: any) => {
       </div>
       {/* Open Box */}
       {modalOpen && (
-        <div className=' max-w-xs px-5 py-2 mt-2 items-center box-border border border-gray-900 drop-shadow-sm'>
+        <div className=' max-w-fit px-5 py-2 mt-2 items-center box-border border border-gray-900 drop-shadow-sm justify-between'>
           {postsData.length === 0 ? (
             <>No Blog Post Found</>
           ) : (

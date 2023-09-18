@@ -2,7 +2,6 @@ import { SanityDocument, groq } from "next-sanity";
 import Image from "next/image";
 import React from "react";
 import urlFor from "../../sanity/lib/urlFor";
-import { SanityClient } from "sanity";
 import { PortableText } from "@portabletext/react";
 
 function BlogList({ post }: { post: SanityDocument }) {
@@ -31,8 +30,8 @@ function BlogList({ post }: { post: SanityDocument }) {
           ) : (
             <p>No main image available</p>
           )}
-          <div className='absolute bg-white text-black w-fit h-fit rounded-3xl bottom-5 left-[46px] md:left-[200px] items-center py-2 px-3'>
-            <div className='flex justify-evenly '>
+          <div className='absolute bg-white text-black w-fit h-fit rounded-3xl bottom-5 left-[46px] md:left-[88px] lg:left-[200px] items-center py-2 px-3'>
+            <div className='flex justify-evenly'>
               <Image
                 src={urlFor(post.author.image).url()}
                 alt={post.author.name}
@@ -46,9 +45,11 @@ function BlogList({ post }: { post: SanityDocument }) {
           </div>
         </div>
       </div>
-      <h2 className='font-bold text-lg mt-3 mb-3'>{post.title}</h2>
-      <p className='w-full h-full md:h-[72px]'>{post.description}</p>
-      <button className='bg-black rounded text-white dark:bg-white dark:text-black py-3 px-5 mt-3'>
+      <h2 className='font-bold text-lg mt-3 mb-3 min-w-[55px]'>{post.title}</h2>
+      <p className='w-full h-full md:h-[72px] line-clamp-1 md:line-clamp-3'>
+        {post.description}
+      </p>
+      <button className='bg-black rounded text-white dark:bg-white dark:text-black py-3 px-5 mt-3 relative left-0 top-0'>
         Read More
       </button>
     </div>

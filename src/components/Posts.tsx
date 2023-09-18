@@ -8,6 +8,7 @@ import Image from "next/image";
 import ArticleBanner from "./ArticleBanner";
 import { Fragment, useEffect, useState } from "react";
 import { fetchPaginatedData } from "../../sanity/lib/client";
+import Search from "./Search";
 
 export default function Posts({ posts = [] }: { posts: SanityDocument[] }) {
   const comp = {
@@ -51,6 +52,7 @@ export default function Posts({ posts = [] }: { posts: SanityDocument[] }) {
     <>
       <Header />
       <Banner posts={posts} />
+      <Search posts={posts} />
       <ArticleBanner />
       <main className='container mx-auto grid grid-cols-1 md:grid-cols-2 max-w-7xl px-10 gap-10 gap-y-16 pb-24'>
         {/* <h1 className='text-2xl p-4 font-bold'>{title}</h1> */}
