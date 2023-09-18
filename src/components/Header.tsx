@@ -11,21 +11,19 @@ function Header() {
     <header className='flex items-center justify-between space-x-2 font-bold px-10 py-5 max-w-7xl mx-auto'>
       <div className='flex items-center space-x-2'>
         <Link href='/'>
-          {theme === "dark" ? (
-            <Image
-              src='https://i.imgur.com/liK7j3u.png'
-              width={150}
-              height={150}
-              alt='logo'
-            />
-          ) : (
-            <Image
-              src='https://i.imgur.com/6Wr9X1f.png'
-              width={150}
-              height={150}
-              alt='logo'
-            />
-          )}
+          <Image
+            src={
+              theme === "dark"
+                ? "https://i.imgur.com/liK7j3u.png"
+                : "https://i.imgur.com/6Wr9X1f.png"
+            }
+            alt='logo'
+            priority
+            layout='responsive'
+            objectFit='cover'
+            width={150}
+            height={150}
+          />
 
           {/* https://i.imgur.com/EwuLaVC.png */}
         </Link>

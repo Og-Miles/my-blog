@@ -1,7 +1,9 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { SocialIcon } from "react-social-icons";
+import Search from "./Search";
+import { SanityDocument } from "next-sanity";
 
-function Banner() {
+function Banner(posts: any) {
   return (
     <div className='flex flex-col lg:flex-row justify-between px-10 py-5 space-x-2 max-w-7xl mx-auto'>
       <div>
@@ -11,14 +13,7 @@ function Banner() {
           & More!
         </p>
 
-        <div className='flex place-items-center bg-gray-200 rounded-full px-5 mt-5 max-w-xs'>
-          <MagnifyingGlassIcon className='w-[24px] h-[24px] items-center dark:text-black' />
-          <input
-            type='text'
-            placeholder='Search'
-            className='border-none outline-none placeholder-black px-5 py-2 items-center bg-transparent'
-          />
-        </div>
+        <Search posts={posts} />
       </div>
 
       <div className='mt-5 lg:mt-0'>

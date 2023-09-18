@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { SanityDocument } from "next-sanity";
-import Head from "next/head";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import BlogList from "./BlogList";
@@ -51,18 +50,18 @@ export default function Posts({ posts = [] }: { posts: SanityDocument[] }) {
   return (
     <>
       <Header />
-      <Banner />
+      <Banner posts={posts} />
       <ArticleBanner />
       <main className='container mx-auto grid grid-cols-1 md:grid-cols-2 max-w-7xl px-10 gap-10 gap-y-16 pb-24'>
         {/* <h1 className='text-2xl p-4 font-bold'>{title}</h1> */}
 
         {visiblePosts.map((post: any) => {
           return (
-            <>
-              <Link key={post._id} href={post.slug.current}>
+            <Fragment key={post._id}>
+              <Link href={post.slug.current}>
                 <BlogList post={post} />
               </Link>
-            </>
+            </Fragment>
           );
         })}
       </main>

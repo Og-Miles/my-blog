@@ -12,8 +12,10 @@ function BlogList({ post }: { post: SanityDocument }) {
         <Image
           src={urlFor(value).url()}
           alt={"okay"}
-          className='object-cover object-left lg:object-center'
+          className='object-cover object-center'
           fill
+          sizes='(max-width: 580px) 100vw, 580px'
+          priority
         />
       ),
     },
@@ -37,6 +39,7 @@ function BlogList({ post }: { post: SanityDocument }) {
                 width={25}
                 height={25}
                 className='rounded-full mr-2'
+                priority
               />
               <p className='font-semibold'>{post?.author?.name}</p>
             </div>

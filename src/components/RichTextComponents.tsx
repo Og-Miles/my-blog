@@ -12,6 +12,7 @@ export const RichTextComponents = {
             src={urlFor(value).url()}
             alt='Blog Post Image'
             fill
+            priority
           />
         </div>
       );
