@@ -17,9 +17,12 @@ function Banner(posts: any) {
       <div className='mt-5 lg:mt-0'>
         <SocialIcon
           url='https://linkedin.com/in/ogbuji-emmanuel'
-          className='mr-3'
+          className='mr-3 dark:bg-white rounded-full'
         />
-        <SocialIcon url='https://twitter.com/BujiMiles' />
+        <SocialIcon
+          url='https://twitter.com/BujiMiles'
+          className='dark:bg-white rounded-full'
+        />
       </div>
     </div>
   );

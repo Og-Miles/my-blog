@@ -20,7 +20,7 @@ function Header() {
             alt='logo'
             priority
             layout='responsive'
-            objectFit='cover'
+            objectFit='contain'
             width={150}
             height={150}
           />
@@ -35,9 +35,9 @@ function Header() {
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {theme === "dark" ? (
-            <SunIcon className='px-2 border-r-2 mr-3 flex w-[40px] cursor-pointer' />
+            <SunIcon className='px-2 border-r-2 mr-3 flex w-[32px] md:w-[40px] cursor-pointer' />
           ) : (
-            <MoonIcon className='px-2 border-r-2 mr-3 flex w-[40px] cursor-pointer' />
+            <MoonIcon className='px-2 border-r-2 mr-3 flex w-[32px] md:w-[40px] cursor-pointer' />
           )}
         </button>
         <Link href='https://wa.me/2348137525589'>
@@ -45,7 +45,7 @@ function Header() {
             <PhoneIcon className='flex w-[18px] mr-2 dark:text-black' />
             <span className='hidden md:flex dark:text-black'>Contact Us</span>
           </button>
-          <PhoneIcon className='flex w-[18px] mr-2 dark:text-white md:hidden' />
+          <PhoneIcon className='flex w-[14px] mr-2 dark:text-white md:hidden' />
         </Link>
       </div>
     </header>

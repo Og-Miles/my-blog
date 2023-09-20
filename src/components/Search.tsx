@@ -6,7 +6,7 @@ import { SanityDocument } from "sanity";
 import SearchedBlogList from "./SearchedBlogList";
 import { client } from "../../sanity/lib/client";
 
-const Search = (post: any) => {
+const Search = ({ posts = [] }: { posts: SanityDocument[] }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [postsData, setPostsData] = useState<SanityDocument[]>([]);
@@ -14,17 +14,18 @@ const Search = (post: any) => {
 
   const closeAndClearPosts = () => {
     setModalOpen(false);
-    setPostsData([]);
+    setSearchText("");
   };
 
   useOutsideClick({
     ref,
     handler: () => {
       closeAndClearPosts();
+      setPostsData([]);
     },
   });
 
-  const postsQuery = groq`*[_type == "post" && (title match $searchText || categories match $searchText)]{
+  const postsQuery = groq`*[_type == "post"  && title match $searchText ] | order(_createdAt desc) {
     ...,
     title,
     description,
@@ -32,8 +33,8 @@ const Search = (post: any) => {
     "slug": slug.current,
     "mainImage": mainImage.asset->url,
     "author": author->{name},
-    "categories": categories[]->{id}
-  } | order(_createdAt desc)`;
+    "categories": category[]->{id}
+  }`;
 
   const fetchPosts = async () => {
     try {
@@ -41,7 +42,6 @@ const Search = (post: any) => {
         searchText: `${searchText}`,
       });
       setPostsData(fetchedPosts);
-      console.log(postsData);
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
@@ -85,7 +85,9 @@ const Search = (post: any) => {
             </div>
           ) : (
             <div className='max-w-fit px-5 py-2 mt-2 items-center box-border border border-gray-900 dark:border-white drop-shadow-sm justify-between'>
-              <SearchedBlogList posts={postsData} />
+              <div>
+                <SearchedBlogList posts={postsData} />
+              </div>
             </div>
           )}
         </div>

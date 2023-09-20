@@ -7,9 +7,9 @@ import Link from "next/link";
 const SearchedBlogList = ({ posts }: { posts: SanityDocument[] }) => {
   return (
     <div className='flex flex-wrap w-full'>
-      {posts.map((post: SanityDocument) => (
-        <Link key={post._id} href={`/${post?.slug?.current || ""}`}>
-          <div className='flex justify-between p-4 mb-4 mx-7'>
+      {posts.map((post: any) => (
+        <Link key={post._id} href={`/${post.slug}`}>
+          <div className='flex flex-col md:flex-row justify-between p-4 mb-4 mx-7'>
             <div className='w-full mr-3'>
               <Image
                 src={urlFor(post.mainImage).url()}
@@ -24,7 +24,9 @@ const SearchedBlogList = ({ posts }: { posts: SanityDocument[] }) => {
               <h2 className='text-lg font-semibold'>{post.title}</h2>
               <p className='text-gray-600'>{post.categories?.title}</p>{" "}
               {/* Assuming a post has only one category */}
-              <p className='mt-2'>{post.description}</p>
+              <p className='mt-2 hidden md:line-clamp-2 lg:line-clamp-none'>
+                {post.description}
+              </p>
             </div>
           </div>
         </Link>
