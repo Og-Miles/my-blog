@@ -9,7 +9,7 @@ export const defaultDocumentNode: DefaultDocumentNodeResolver = (S, {schemaType}
         S.view
           .component(Iframe)
           .options({
-            url: `http://localhost:3000/api/preview`,
+            url: `https://moore-blog.vercel.app/api/preview`,
           })
           .title('Preview'),
       ])
