@@ -26,7 +26,7 @@ const Search = ({ posts = [] }: { posts: SanityDocument[] }) => {
       closeAndClearPosts();
     },
   });
-
+  // Query sanity database to get my title, description and category
   const postsQuery = groq`*[_type == "post"  && title match $searchText || category match $searchText || description match $searchText ] | order(_createdAt desc) {
     ...,
     title,
