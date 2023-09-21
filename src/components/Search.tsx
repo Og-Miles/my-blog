@@ -27,7 +27,7 @@ const Search = ({ posts = [] }: { posts: SanityDocument[] }) => {
     },
   });
 
-  const postsQuery = groq`*[_type == "post"  && title match $searchText || categories match $searchText || description match $searchText ] | order(_createdAt desc) {
+  const postsQuery = groq`*[_type == "post"  && title match $searchText || category match $searchText || description match $searchText ] | order(_createdAt desc) {
     ...,
     title,
     description,
