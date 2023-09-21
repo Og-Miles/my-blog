@@ -10,22 +10,24 @@ const Search = ({ posts = [] }: { posts: SanityDocument[] }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [postsData, setPostsData] = useState<SanityDocument[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const ref = useRef<any>();
 
   const closeAndClearPosts = () => {
     setModalOpen(false);
     setSearchText("");
+    setPostsData([]);
   };
 
   useOutsideClick({
     ref,
     handler: () => {
       closeAndClearPosts();
-      setPostsData([]);
     },
   });
 
-  const postsQuery = groq`*[_type == "post"  && title match $searchText ] | order(_createdAt desc) {
+  const postsQuery = groq`*[_type == "post"  && title match $searchText || categories match $searchText || description match $searchText ] | order(_createdAt desc) {
     ...,
     title,
     description,
@@ -38,12 +40,15 @@ const Search = ({ posts = [] }: { posts: SanityDocument[] }) => {
 
   const fetchPosts = async () => {
     try {
+      setLoading(true); // Show loading indicator
       const fetchedPosts: SanityDocument[] = await client.fetch(postsQuery, {
-        searchText: `${searchText}`,
+        searchText: `*${searchText}*`,
       });
       setPostsData(fetchedPosts);
     } catch (error) {
       console.error("Error fetching posts:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,6 +58,8 @@ const Search = ({ posts = [] }: { posts: SanityDocument[] }) => {
     searchTimeout = setTimeout(() => {
       if (searchText.trim().length >= 3) {
         fetchPosts();
+      } else {
+        setLoading(false);
       }
     }, 1000);
 
@@ -64,7 +71,7 @@ const Search = ({ posts = [] }: { posts: SanityDocument[] }) => {
   }, [searchText]);
 
   return (
-    <div className=' flex flex-col justify-between max-w-7xl px-10' ref={ref}>
+    <div className='flex flex-col justify-between max-w-7xl px-10' ref={ref}>
       <div className='flex place-items-center px-5 mt-5 max-w-xs box-border border border-gray-900 rounded-full dark:border-gray-100'>
         <MagnifyingGlassIcon className='w-[24px] h-[24px] items-center dark:text-white' />
         <input
@@ -79,7 +86,11 @@ const Search = ({ posts = [] }: { posts: SanityDocument[] }) => {
       {/* Open Box */}
       {modalOpen && (
         <div>
-          {postsData.length === 0 ? (
+          {loading ? (
+            <div className='box-border border border-gray-900 dark:border-white justify-between rounded-full max-w-fit px-5 py-2 mt-2 items-center'>
+              <>Loading...</>
+            </div>
+          ) : postsData.length === 0 ? (
             <div className='box-border border border-gray-900 dark:border-white justify-between rounded-full max-w-fit px-5 py-2 mt-2 items-center'>
               <>No Blog Post Found</>
             </div>
