@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const data = await client.fetch(postsQuery);
 
-  return { props: { data, preview, previewToken } };
+  return { props: { data, preview, previewToken }, revalidate: 10 };
 };
 
 export default function Home({
