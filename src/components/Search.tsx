@@ -71,7 +71,10 @@ const Search = ({ posts = [] }: { posts: SanityDocument[] }) => {
   }, [searchText]);
 
   return (
-    <div className='flex flex-col justify-between max-w-7xl px-10' ref={ref}>
+    <div
+      className='flex flex-col justify-between max-w-7xl px-10 mx-auto'
+      ref={ref}
+    >
       <div className='flex place-items-center px-5 mt-5 max-w-xs box-border border border-gray-900 rounded-full dark:border-gray-100'>
         <MagnifyingGlassIcon className='w-[24px] h-[24px] items-center dark:text-white' />
         <input
