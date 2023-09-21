@@ -35,9 +35,9 @@ const BackToTopButton = () => {
     >
       <button
         onClick={scrollToTop}
-        className='bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-all duration-300 w-full h-full'
+        className='bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-all duration-300 w-fit h-fit'
       >
-        <ArrowUpCircleIcon className='text-white h-[24px] w-full'  />
+        <ArrowUpCircleIcon className='text-white h-[24px] w-full' />
       </button>
     </div>
   );
