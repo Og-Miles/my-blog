@@ -24,8 +24,6 @@ function Header() {
             width={150}
             height={150}
           />
-
-          {/* https://i.imgur.com/EwuLaVC.png */}
         </Link>
       </div>
 

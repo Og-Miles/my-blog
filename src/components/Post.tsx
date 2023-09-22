@@ -19,6 +19,15 @@ export default function Post({ post }: { post: SanityDocument }) {
       <Header />
       <Banner />
       <main className='container mx-auto prose  dark:prose-invert prose-lg max-w-7xl px-10'>
+        <div className='shadow-md rounded-full w-fit'>
+          <p className='py-1 px-2'>
+            {new Date(post._createdAt).toLocaleDateString("en-UK", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </p>
+        </div>
         {post?.body ? (
           <PortableText value={post?.body} components={RichTextComponents} />
         ) : null}

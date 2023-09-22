@@ -30,6 +30,7 @@ function BlogList({ post }: { post: SanityDocument }) {
           ) : (
             <p>No main image available</p>
           )}
+
           <div className='absolute bg-white text-black w-fit h-fit rounded-3xl bottom-5 left-[46px] md:left-[73px] lg:left-[153px] items-center py-2 px-3'>
             <div className='flex justify-evenly'>
               <Image
@@ -46,6 +47,15 @@ function BlogList({ post }: { post: SanityDocument }) {
         </div>
       </div>
       <h2 className='font-bold text-lg mt-3 mb-3 min-w-[55px]'>{post.title}</h2>
+      <div className='w-fit'>
+        <p className='font-semibold my-2'>
+          {new Date(post._createdAt).toLocaleDateString("en-UK", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
+        </p>
+      </div>
       <p className='w-full h-full md:h-[72px] line-clamp-1 md:line-clamp-3'>
         {post.description}
       </p>
