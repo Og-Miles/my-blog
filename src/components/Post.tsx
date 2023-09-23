@@ -11,6 +11,7 @@ import BackToTopButton from "./BackToTopButton";
 const builder = imageUrlBuilder(client);
 
 export default function Post({ post }: { post: SanityDocument }) {
+  console.log(post._createdAt);
   return (
     <>
       <Head>
@@ -19,7 +20,7 @@ export default function Post({ post }: { post: SanityDocument }) {
       <Header />
       <Banner />
       <main className='container mx-auto prose  dark:prose-invert prose-lg max-w-7xl px-10'>
-        <div className='shadow-md rounded-full w-fit'>
+        {/* <div className='shadow-md rounded-full w-fit'>
           <p className='py-1 px-2'>
             {new Date(post._createdAt).toLocaleDateString("en-UK", {
               day: "numeric",
@@ -27,7 +28,7 @@ export default function Post({ post }: { post: SanityDocument }) {
               year: "numeric",
             })}
           </p>
-        </div>
+        </div> */}
         {post?.body ? (
           <PortableText value={post?.body} components={RichTextComponents} />
         ) : null}

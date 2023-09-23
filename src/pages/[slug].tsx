@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const PreviewProvider = dynamic(() => import("@/components/PreviewProvider"));
 export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{ 
-  title, mainImage, body, author->, _createdAt, description, categories[]->
+  title, mainImage, body, author->,description, categories[]->
 }`;
 
 // Prepare Next.js to know which routes already exist
