@@ -1,3 +1,8 @@
+
+![Screenshot (121)](https://github.com/Og-Miles/my-blog/assets/95836608/b46fe026-bc3c-4fad-8b35-24e7740ec847)
+`Moore Blog Preview
+`
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
